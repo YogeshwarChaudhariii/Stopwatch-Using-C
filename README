@@ -1,0 +1,37 @@
+About Project:
+
+Project Name: Stopwatch Using C Language.
+Author: Yogeshwar Prakash Chaudhari.
+File Name: config.c
+
+  A simple console-based stopwatch program written in C language, allowing users to start, stop, resume, and reset a timer using a menu-driven interface.  
+This project demonstrates the use of loops, keyboard input handling, and time control in C.
+
+////////////////////////////////////////////////////////////////////////
+//
+// Implemented Features:
+//
+////////////////////////////////////////////////////////////////////////
+
+- Start Stopwatch – Begin counting from 00:00:00  
+- Stop Stopwatch – Pause the timer at the current time  
+- Resume Stopwatch – Continue counting from where you stopped  
+- Reset Stopwatch – Reset the timer to zero  
+- Exit Program – Close the application gracefully  
+- Non-blocking key input using `_kbhit()` and `_getch()`  
+- Real-time delay control using `sleep()` function  
+
+////////////////////////////////////////////////////////////////////////
+//
+// How It Works:
+//
+////////////////////////////////////////////////////////////////////////
+
+The stopwatch runs in real-time using a loop that increments the seconds value every second.  
+Minutes and hours are updated automatically when seconds or minutes reach 60.  
+
+Keyboard input is handled using:
+- `_kbhit()`  Checks if a key is pressed (non-blocking)
+- `_getch()`  Captures the pressed key
+
+When the stopwatch is running, pressing 2 stops it and returns to the menu.
