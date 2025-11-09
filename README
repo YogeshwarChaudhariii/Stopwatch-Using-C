@@ -4,8 +4,7 @@ Project Name: Stopwatch Using C Language.
 Author: Yogeshwar Prakash Chaudhari.
 File Name: config.c
 
-  A simple console-based stopwatch program written in C language, allowing users to start, stop, resume, and reset a timer using a menu-driven interface.  
-This project demonstrates the use of loops, keyboard input handling, and time control in C.
+  A simple console-based stopwatch program written in C language, allowing users to start, stop, resume, and reset a timer using a menu-driven interface. This project demonstrates the use of loops, keyboard input handling, and time control in C.
 
 ////////////////////////////////////////////////////////////////////////
 //
