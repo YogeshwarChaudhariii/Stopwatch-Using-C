@@ -5,11 +5,19 @@
 
 ///////////////////////////////////////////////////////////////
 //
-// Global variables
+// Global structure
 //
 ///////////////////////////////////////////////////////////////
-int hour = 0, minute = 0, second = 0;
-int running = 0;   // 0 = stopped, 1 = running
+struct Stopwatch
+{
+    int hour; 
+    int minute;
+    int second;
+    int running;   // 0 = stopped, 1 = running
+};
+
+// Single global stopwatch object
+struct Stopwatch sobj = {0, 0, 0, 0};
 
 ///////////////////////////////////////////////////////////////
 //
@@ -19,31 +27,31 @@ int running = 0;   // 0 = stopped, 1 = running
 ///////////////////////////////////////////////////////////////
 void StartStopwatch()
 {
-    if (running)
+    if(sobj.running)
     {
         printf("Stopwatch is already running!\n");
         return;
     }
 
-    running = 1;
+    sobj.running = 1;
     printf("Stopwatch started. It will keep running until you stop it from pressing 2.\n\n");
 
-    while (running)
+    while (sobj.running)
     {
-        printf("\rTime elapsed: %02d : %02d : %02d", hour, minute, second);
+        printf("\rTime elapsed: %02d : %02d : %02d", sobj.hour, sobj.minute, sobj.second);
         fflush(stdout);
         sleep(1);
-        second++;
+        sobj.second++;
 
-        if (second == 60)
+        if (sobj.second == 60)
         {
-            second = 0;
-            minute++;
+            sobj.second = 0;
+            sobj.minute++;
         }
-        if (minute == 60)
+        if (sobj.minute == 60)
         {
-            minute = 0;
-            hour++;
+            sobj.minute = 0;
+            sobj.hour++;
         }
 
         // Non-blocking check for stop request
@@ -54,7 +62,7 @@ void StartStopwatch()
             {
                 printf("\nReturning to menu...\n");
                 sleep(2);
-                running = 0;
+                sobj.running = 0;
                 break;
             }
         }
@@ -69,10 +77,10 @@ void StartStopwatch()
 ///////////////////////////////////////////////////////////////
 void StopStopwatch()
 {
-    if (running)
+    if (sobj.running)
     {
-        running = 0;
-        printf("\nStopwatch stopped at %02d : %02d : %02d\n", hour, minute, second);
+        sobj.running = 0;
+        printf("\nStopwatch stopped at %02d : %02d : %02d\n", sobj.hour, sobj.minute, sobj.second);
     }
     else
     {
@@ -88,31 +96,31 @@ void StopStopwatch()
 ///////////////////////////////////////////////////////////////
 void ResumeStopwatch()
 {
-    if (running)
+    if (sobj.running)
     {
         printf("Stopwatch is already running!\n");
         return;
     }
 
-    running = 1;
+    sobj.running = 1;
     printf("Stopwatch resumed. It will keep running until you stop it from pressing 2.\n\n");
 
-    while (running)
+    while (sobj.running)
     {
-        printf("\rTime elapsed: %02d : %02d : %02d", hour, minute, second);
+        printf("\rTime elapsed: %02d : %02d : %02d", sobj.hour, sobj.minute, sobj.second);
         fflush(stdout);
         sleep(1);
-        second++;
+        sobj.second++;
 
-        if (second == 60)
+        if (sobj.second == 60)
         {
-            second = 0;
-            minute++;
+            sobj.second = 0;
+            sobj.minute++;
         }
-        if (minute == 60)
+        if (sobj.minute == 60)
         {
-            minute = 0;
-            hour++;
+            sobj.minute = 0;
+            sobj.hour++;
         }
 
         if (_kbhit())
@@ -122,7 +130,7 @@ void ResumeStopwatch()
             {
                 printf("\nReturning to menu...\n");
                 sleep(2);
-                running = 0;
+                sobj.running = 0;
                 break;
             }
         }
@@ -137,8 +145,8 @@ void ResumeStopwatch()
 ///////////////////////////////////////////////////////////////
 void ResetStopwatch()
 {
-    hour = minute = second = 0;
-    running = 0;
+    sobj.hour = sobj.minute = sobj.second = 0;
+    sobj.running = 0;
     printf("Stopwatch reset to 00 : 00 : 00\n");
 }
 
